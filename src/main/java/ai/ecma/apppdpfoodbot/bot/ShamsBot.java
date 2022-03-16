@@ -120,7 +120,6 @@ public class ShamsBot extends TelegramLongPollingBot {
                 }
             }
         }
-
     }
 
 }

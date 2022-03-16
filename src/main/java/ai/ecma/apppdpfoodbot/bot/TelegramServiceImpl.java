@@ -126,10 +126,16 @@ public class TelegramServiceImpl implements TelegramService {
 
         List<KeyboardRow> keyboardRowList = new ArrayList<>();
 
-        for (int i = 1; i < 10; i++) {
+        //1-9
+        for (int i = 1; i < 10; i+=3) {
             KeyboardRow row = new KeyboardRow();
             KeyboardButton button = new KeyboardButton(String.valueOf(i));
+            KeyboardButton button1 = new KeyboardButton(String.valueOf(i+1));
+            KeyboardButton button2 = new KeyboardButton(String.valueOf(i+2));
             row.add(button);
+            row.add(button1);
+            row.add(button2);
+            keyboardRowList.add(row);
         }
         KeyboardRow row = new KeyboardRow();
         KeyboardButton back = new KeyboardButton(Constant.BACK);
@@ -140,7 +146,6 @@ public class TelegramServiceImpl implements TelegramService {
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
 
-
         return sendMessage;
     }
 
@@ -148,7 +153,6 @@ public class TelegramServiceImpl implements TelegramService {
     public SendPhoto selectProduct(Update update) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(String.valueOf(update.getMessage().getChatId()));
-
 
         Optional<Book> optionalBook = bookRepository.findByName(update.getMessage().getText());
         Book book = optionalBook.get();
